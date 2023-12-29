@@ -9,8 +9,8 @@ namespace CurlAndStoreApp
 {
     public class DataContextEF : DbContext
     {
-        private readonly Azure.Response<KeyVaultSecret> _dbString;
-        public DataContextEF(Azure.Response<KeyVaultSecret> dbString)
+        private readonly string _dbString;
+        public DataContextEF(string dbString)
         {
             _dbString = dbString;
         }
@@ -19,7 +19,7 @@ namespace CurlAndStoreApp
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
 
-            options.UseSqlServer(_dbString.ToString());
+            options.UseSqlServer($"{_dbString}");
 
         }
 

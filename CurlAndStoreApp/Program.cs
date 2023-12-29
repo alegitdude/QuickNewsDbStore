@@ -34,17 +34,17 @@ SecretClientOptions options = new SecretClientOptions()
             Delay= TimeSpan.FromSeconds(2),
             MaxDelay = TimeSpan.FromSeconds(16),
             MaxRetries = 3,
-            Mode = RetryMode.Exponential
+            
          }
 };
 var client = new SecretClient(new Uri("https://NewsVault.vault.azure.net/"), new DefaultAzureCredential(), options);
 
-var apiKey = await client.GetSecretAsync("ApiToken");
-var dbString = await client.GetSecretAsync("SqlDbPass");
-KeyVaultSecret secret = client.GetSecret("<mySecret>");
-apiKey = apiKey.Value;
-dbString = dbString.Value;
-throw AccessViolationException($"{apiKey}, {dbString}");
+KeyVaultSecret apiSecret = await client.GetSecretAsync("ApiToken");
+KeyVaultSecret dbSecret = await client.GetSecretAsync("SqlDbPass");
+
+string apiKey = apiSecret.Value;
+string dbString = dbSecret.Value;
+
 
 
 

@@ -12,9 +12,9 @@ public interface IDbCrud
 public class DbCrud : IDbCrud
 {
 
-    private Azure.Response<KeyVaultSecret> _config;
+    private string _config;
 
-    public DbCrud(Azure.Response<KeyVaultSecret> dbString)
+    public DbCrud(string dbString)
     {
         _config = dbString;
     }
@@ -29,7 +29,7 @@ public class DbCrud : IDbCrud
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Problem reading from the db", ex.Message);
+            Console.WriteLine($"Problem reading from the db {ex} etc");
             return new List<string>();
 
         }
@@ -37,7 +37,7 @@ public class DbCrud : IDbCrud
     }
     public async Task<bool> Store(List<Article> articleList)
     {
-        
+
         try
         {
             var context = new DataContextEF(_config);
