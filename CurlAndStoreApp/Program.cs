@@ -44,6 +44,7 @@ var dbString = await client.GetSecretAsync("SqlDbPass");
 KeyVaultSecret secret = client.GetSecret("<mySecret>");
 apiKey = apiKey.Value;
 dbString = dbString.Value;
+throw AccessViolationException($"{apiKey}, {dbString}");
 
 
 
