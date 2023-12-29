@@ -26,12 +26,25 @@ List<string> categories = new List<string>
 };
 
 
-var kvUri = "https://newsvault.vault.azure.net/";
 
-var client = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+SecretClientOptions options = new SecretClientOptions()
+{
+    Retry =
+        {
+            Delay= TimeSpan.FromSeconds(2),
+            MaxDelay = TimeSpan.FromSeconds(16),
+            MaxRetries = 3,
+            Mode = RetryMode.Exponential
+         }
+};
+var client = new SecretClient(new Uri("https://NewsVault.vault.azure.net/"), new DefaultAzureCredential(), options);
+
 var apiKey = await client.GetSecretAsync("ApiToken");
 var dbString = await client.GetSecretAsync("SqlDbPass");
-Console.WriteLine(apiKey);
+KeyVaultSecret secret = client.GetSecret("<mySecret>");
+apiKey = apiKey.Value;
+dbString = dbString.Value;
+
 
 
 IApiDataReader apiDataReader = new ApiDataReader();
