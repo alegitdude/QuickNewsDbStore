@@ -31,7 +31,7 @@ var kvUri = "https://newsvault.vault.azure.net/";
 var client = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
 var apiKey = await client.GetSecretAsync("ApiToken");
 var dbString = await client.GetSecretAsync("SqlDbPass");
-
+Console.WriteLine(apiKey);
 
 
 IApiDataReader apiDataReader = new ApiDataReader();
