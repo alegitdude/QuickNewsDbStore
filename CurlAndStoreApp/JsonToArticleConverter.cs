@@ -14,12 +14,14 @@ public class JsonToArticleConverter : IJsonToArticleConverter
         var root = JsonSerializer.Deserialize<Root>(json);
 
         var generalList = JsonArticleToArticle(root.data.general);
+        var politicsList = JsonArticleToArticle(root.data.politics);
         var businessList = JsonArticleToArticle(root.data.business);
         var techList = JsonArticleToArticle(root.data.tech);
         var sportsList = JsonArticleToArticle(root.data.sports);
         var entertainmentList = JsonArticleToArticle(root.data.entertainment);
 
         articleList.AddRange(generalList);
+        articleList.AddRange(politicsList);
         articleList.AddRange(businessList);
         articleList.AddRange(techList);
         articleList.AddRange(sportsList);
