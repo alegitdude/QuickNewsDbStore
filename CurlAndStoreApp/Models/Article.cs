@@ -7,7 +7,7 @@ namespace CurlAndStore.Models
         public Article(string uuid, string title, string description, string keywords, 
             string snippet, string url, string image_Url, string language, 
             DateTime published_At, string source, string category1, string category2,
-            double? relevance_Score, string locale, int topStory)
+            string locale)
         {
             Uuid = uuid;
             Title = title;
@@ -21,9 +21,7 @@ namespace CurlAndStore.Models
             Source = source;
             Category1 = category1;
             Category2 = category2;
-            Relevance_Score = relevance_Score;
             Locale = locale;
-            TopStory = topStory;
         }
 
         [Key]
@@ -49,10 +47,10 @@ namespace CurlAndStore.Models
         public string Category1 { get; set; } = string.Empty;
         [StringLength(20)]
         public string? Category2 { get; set; } = string.Empty;
-        public double? Relevance_Score { get; set; } = null;
+       
         [StringLength(100)]
         public string Locale { get; set; } = string.Empty;
-        public int TopStory { get; set; } = 1;
+ 
 
 
 

@@ -1,11 +1,11 @@
 ﻿public interface IApiDataReader
 {
-    Task<string> Read(string baseAddress, string requestUri, string category);
+    Task<string> Read(string baseAddress, string requestUri);
 }
 
 public class ApiDataReader : IApiDataReader
 {
-    public async Task<string> Read(string baseAddress, string requestUri, string cateogry)
+    public async Task<string> Read(string baseAddress, string requestUri)
     {
         using var client = new HttpClient();
         client.BaseAddress = new Uri(baseAddress);

@@ -19,7 +19,7 @@ namespace CurlAndStoreApp
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
 
-            options.UseSqlServer($"{_dbString}");
+            options.UseSqlServer($"{_dbString}").EnableSensitiveDataLogging();
 
         }
 

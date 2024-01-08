@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 public interface IDbCrud
 {
     Task<bool> Store(List<Article> articleList);
-    Task<List<string>> Read(string category);
+    Task<List<string>> Read();
 }
 public class DbCrud : IDbCrud
 {
@@ -19,12 +19,12 @@ public class DbCrud : IDbCrud
         _config = dbString;
     }
 
-    public async Task<List<string>> Read(string category)
+    public async Task<List<string>> Read()
     {
         try
         {
             var context = new DataContextEF(_config);
-            return await context.Articles.Select(q => q.Uuid).ToListAsync();
+            return await context.Articles.Select(q => q.Uuid).AsNoTracking().ToListAsync();
 
         }
         catch (Exception ex)
@@ -40,9 +40,13 @@ public class DbCrud : IDbCrud
 
         try
         {
-            var context = new DataContextEF(_config);
-            await context.Articles.AddRangeAsync(articleList);
-            await context.SaveChangesAsync();
+            var newContext = new DataContextEF(_config);
+            foreach(Article article in articleList) 
+            {
+                Console.WriteLine(article.Uuid);
+            }
+            await newContext.Articles.AddRangeAsync(articleList);
+            await newContext.SaveChangesAsync();
             return true;
 
 
