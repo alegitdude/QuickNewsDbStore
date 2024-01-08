@@ -25,14 +25,13 @@ SecretClientOptions options = new SecretClientOptions()
 
 var client = new SecretClient(new Uri("https://NewsVault.vault.azure.net/"), new DefaultAzureCredential(), options);
 
-//KeyVaultSecret apiSecret = await client.GetSecretAsync("ApiToken");
-//KeyVaultSecret dbSecret = await client.GetSecretAsync("SqlDbPass");
+KeyVaultSecret apiSecret = await client.GetSecretAsync("ApiToken");
+KeyVaultSecret dbSecret = await client.GetSecretAsync("SqlDbPass");
 
-//string apiKey = apiSecret.Value;
-//string dbString = dbSecret.Value;
+string apiKey = apiSecret.Value;
+string dbString = dbSecret.Value;
 
-string apiKey = "zRTgVLyhrhkzAR5BYD5pI2b6tmesa0ZVuo7Mh9sZ";
-string dbString = "Server=tcp:news-server.database.windows.net,1433;Initial Catalog=NewsDb;Persist Security Info=False;User ID=newsapp;Password=Trfodj51;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
 
 IApiDataReader apiDataReader = new ApiDataReader();
 IJsonToArticleConverter jsonConverter = new JsonToArticleConverter();
