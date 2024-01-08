@@ -41,10 +41,7 @@ public class DbCrud : IDbCrud
         try
         {
             var newContext = new DataContextEF(_config);
-            foreach(Article article in articleList) 
-            {
-                Console.WriteLine(article.Uuid);
-            }
+            
             await newContext.Articles.AddRangeAsync(articleList);
             await newContext.SaveChangesAsync();
             return true;
