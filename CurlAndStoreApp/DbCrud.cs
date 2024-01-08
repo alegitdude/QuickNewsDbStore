@@ -44,6 +44,7 @@ public class DbCrud : IDbCrud
             
             await newContext.Articles.AddRangeAsync(articleList);
             await newContext.SaveChangesAsync();
+            Console.WriteLine(articleList.Count(), "Articles")
             return true;
 
 
